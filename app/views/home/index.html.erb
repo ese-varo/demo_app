@@ -30,7 +30,9 @@
                       </div>
                       <div class="col">
                         <p class="card-text">Employees: 
-                          <span class="badge badge-info badge-pill"><%= rand(0..40) %></span>
+                          <span class="badge badge-info badge-pill">
+                            <%= branch.employees.count %>
+                          </span>
                         </p>
                       </div>
                       <div class="col">
@@ -49,7 +51,7 @@
         <div class="col-md-6 container-fluid">
           <%= link_to 'Add a new branch', new_user_branch_path(current_user),
             class: 'btn btn-success btn-block btn-lg shadow' %>
-          <%= link_to 'Add employees to a branch', '#',
+          <%= link_to 'Add employees to a branch', new_employee_path,
             class: 'btn btn-success btn-block btn-lg shadow' %>
         </div>
       </div>

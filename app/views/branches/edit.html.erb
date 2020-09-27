@@ -1,35 +1,33 @@
 <h1>Editing Branch</h1>
 
 <%= render 'form', branch: @branch %>
-<table class="table table-borderless">
-  <thead>
-    <tr>
-      <th scope="col">Name</th>
-      <th scope="col">RFC</th>
-      <th scope="col">Position</th>
-      <th scope="col"></th>
-    </tr>
-  </thead>
-  <tbody>
-    <tr>
-      <td>Markasdfasdfasdfasdf</td>
-      <td>Ottoasdfasfdasfdasfdasdfasdf</td>
-      <td>@mdo</td>
-      <th scope="row"><%= link_to 'Edit', '#', class: 'btn btn-warning btn-sm' %></th>
-    </tr>
-    <tr>
-      <td>Jacob</td>
-      <td>Thornton</td>
-      <td>@fat</td>
-      <th scope="row"><%= link_to 'Edit', '#', class: 'btn btn-warning btn-sm' %></th>
-    </tr>
-    <tr>
-      <td colspan="2">Larry the Bird</td>
-      <td>@twitter</td>
-      <th scope="row"><%= link_to 'Edit', '#', class: 'btn btn-warning btn-sm' %></th>
-    </tr>
-  </tbody>
-</table>
+<% if @branch.employees.count > 0 %>
+  <table class="table table-borderless">
+    <thead>
+      <tr>
+        <th scope="col">Name</th>
+        <th scope="col">RFC</th>
+        <th scope="col">Position</th>
+        <th scope="col"></th>
+      </tr>
+    </thead>
+    <tbody>
+      <% @branch.employees.each do |employee| %>
+        <% name = "#{employee.first_name} #{employee.last_name} #{employee.maiden_name}" %>
+        <tr>
+          <td><%= name %></td>
+          <td><%= employee.rfc %></td>
+          <td><%= employee.position %></td>
+          <th scope="row"><%= link_to 'Edit', edit_branch_employee_path(@branch, employee),
+            class: 'btn btn-warning btn-sm' %>
+          </th>
+        </tr>
+      <% end %>
+    </tbody>
+  </table>
+<% else %>
+  <p>No employees registered</p>
+<% end %>
 
 <%= link_to 'Show', [current_user, @branch], class: 'btn btn-info' %> |
 <%= link_to 'Back', user_branches_path(current_user), class: 'btn btn-outline-secondary' %>
