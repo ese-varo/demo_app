@@ -9,12 +9,12 @@
         </div>
         <div class="col">
           <p class="card-text">Employees: 
-            <span class="badge badge-info badge-pill"><%= rand(0..40) %></span>
+            <span class="badge badge-info badge-pill">
+              <%= branch.employees.count %>
+            </span>
           </p>
         </div>
         <div class="col">
-          <%# <td><%= branch.user.name %1></td> %>
-          <%# <td><%= link_to 'Show', branch %1></td> %>
           <td>
             <%= link_to 'Edit Branch', edit_user_branch_path(current_user, branch),
               class: 'btn btn-warning'%>
@@ -32,4 +32,4 @@
 
 <br>
 
-<%= link_to 'New Branch', new_user_branch_path(current_user), class: 'btn btn-info' %>
+<%= link_to 'New Branch', new_user_branch_path(current_user), class: 'btn btn-success' %>

@@ -1,0 +1,51 @@
+<%= form_with(model: [@branch, employee], local: true, class: 'mb-5') do |form| %>
+  <% if employee.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+
+      <ul>
+        <% employee.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="form-row">
+    <div class="field form-group col-md-4">
+      <%= form.label :first_name %>
+      <%= form.text_field :first_name, class: 'form-control' %>
+    </div>
+
+    <div class="field form-group col-md-4">
+      <%= form.label :maiden_name %>
+      <%= form.text_field :maiden_name, class: 'form-control' %>
+    </div>
+
+    <div class="field form-group col-md-4">
+      <%= form.label :last_name %>
+      <%= form.text_field :last_name, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :rfc %>
+      <%= form.text_field :rfc, class: 'form-control' %>
+    </div>
+
+    <div class="field form-group col-md-6">
+      <%= form.label :position %>
+      <%= form.text_field :position, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :branch %>
+    <%= form.collection_select :branch, Branch.all, :id, :name %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
