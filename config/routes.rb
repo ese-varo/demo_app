@@ -3,5 +3,10 @@ Rails.application.routes.draw do
   resources :users do
     resources :branches
   end
+
+  resources :branches do
+    resources :employees
+  end
+
   root to: 'home#index'
 end
