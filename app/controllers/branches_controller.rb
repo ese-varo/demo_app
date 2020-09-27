@@ -50,6 +50,7 @@ class BranchesController < ApplicationController
   end
 
   private
+
     def set_branch
       @branch = current_user.branches.find(params[:id])
     end
