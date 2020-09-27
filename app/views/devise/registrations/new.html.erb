@@ -1,55 +1,60 @@
 <h2>Sign up</h2>
+<small id="emailHelp" class="form-text text-muted">All fields are required *</small>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="field">
-    <%= f.label :first_name, "Name" %><br />
-    <%= f.text_field :first_name, auto_complete: "name" %>
+  <div class="form-row">
+    <div class="field form-group col-md-4">
+      <%= f.label :first_name, "Name" %><br />
+      <%= f.text_field :first_name, auto_complete: "name", class: 'form-control' %>
+    </div>
+
+    <div class="field form-group col-md-4">
+      <%= f.label :last_name %><br />
+      <%= f.text_field :last_name, auto_complete: "last-name", class: 'form-control' %>
+    </div>
+
+    <div class="field form-group col-md-4">
+      <%= f.label :maiden_name %><br />
+      <%= f.text_field :maiden_name, auto_complete: "maiden-name", class: 'form-control' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :last_name %><br />
-    <%= f.text_field :last_name, auto_complete: "last-name" %>
+  <div class="form-row">
+    <div class="field form-group col-md-4">
+      <%= f.label :email %><br />
+      <%= f.email_field :email, autofocus: true, autocomplete: "email", class: 'form-control' %>
+    </div>
+
+    <div class="field form-group col-md-4">
+      <%= f.label :company %><br />
+      <%= f.text_field :company, auto_complete: "company", class: 'form-control' %>
+    </div>
+
+    <div class="field form-group col-md-4">
+      <%= f.label :rfc, 'RFC' %><br />
+      <%= f.text_field :rfc, auto_complete: "rfc", class: 'form-control' %>
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= f.label :password %>
+      <% if @minimum_password_length %>
+        <em>(<%= @minimum_password_length %> characters minimum)</em>
+      <% end %><br />
+      <%= f.password_field :password, autocomplete: "new-password", class: 'form-control' %>
+    </div>
+
+    <div class="field form-group col-md-6">
+      <%= f.label :password_confirmation %><br />
+      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control' %>
+    </div>
   </div>
 
-  <div class="field">
-    <%= f.label :maiden_name %><br />
-    <%= f.text_field :maiden_name, auto_complete: "maiden-name" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :email %><br />
-    <%= f.email_field :email, autofocus: true, autocomplete: "email" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password %>
-    <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
-    <% end %><br />
-    <%= f.password_field :password, autocomplete: "new-password" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :password_confirmation %><br />
-    <%= f.password_field :password_confirmation, autocomplete: "new-password" %>
-  </div>
-
-  <br />
-
-  <div class="field">
-    <%= f.label :company %><br />
-    <%= f.text_field :company, auto_complete: "company" %>
-  </div>
-
-  <div class="field">
-    <%= f.label :rfc, 'RFC' %><br />
-    <%= f.text_field :rfc, auto_complete: "rfc" %>
-  </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Sign up", class: 'btn btn-primary' %>
   </div>
 <% end %>
 

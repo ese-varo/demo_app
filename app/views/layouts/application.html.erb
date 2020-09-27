@@ -12,8 +12,25 @@
 
   <body>
     <%= render 'shared/navbar' %>
-    <p class="notice"><%= notice %></p>
-    <p class="alert"><%= alert %></p>
-    <%= yield %>
+
+    <div class="container-fluid mb-8">
+      <div class="row">
+        <div class="container">
+          <p class="notice alert-success" role="alert"><%= notice %></p>
+          <p class="alert" role="alert"><%= alert %></p>
+          <%= yield %>
+
+          <div class="container fixed-bottom">
+            <hr class="my-4">
+            <footer class="row my-5">
+              <small>
+                <p>&copy; Proyekt Company 2020</p>
+              </small>
+            </footer>
+          </div>
+        </div>
+
+      </div>
+    </div>
   </body>
 </html>

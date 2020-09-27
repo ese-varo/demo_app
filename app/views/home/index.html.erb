@@ -1,12 +1,59 @@
-<h1>Home#index</h1>
-<p>PROYEKT</p>
-
-<%= link_to 'Add new sucursal', '#', class: 'btn btn-success' %>
-<%= link_to 'Add employees to a sucursal', '#', class: 'btn btn-success' %>
-
-<div>
-  <h2>Sucursales</h2>
-  <ul>
-    
-  </ul>
+<div class="jumbotron jumbotron-fluid">
+  <div class="container">
+    <h1 class="display-4">Company Administration</h1>
+    <p class="lead">
+      Lorem ipsum dolor sit amet, consectetur adipiscing elit. Proin interdum interdum tristique. Pellentesque nec sapien purus. Proin in ex sem. Integer risus ex, suscipit et elementum dignissim, viverra vitae odio. Morbi blandit mollis tristique.
+    </p>
+    <hr class="my-4">
+    <p>
+      Pellentesque nec sapien purus. Proin in ex sem.
+    </p>
+  </div>
 </div>
+
+<% if user_signed_in? %>
+  <div class="row">
+    <div class="container">
+      <div class="row">
+        <div class="col-md-6">
+          <% if current_user.branches.any? %>
+            <div class="card shadow mb-5 bg-white rounded">
+              <div class="card-header">
+                <h5>Company Branches</h5>
+              </div>
+              <ul class="list-group list-group-flush">
+                <% for branch in current_user.branches %>    
+                  <li class="list-group-item">
+                    <div class="row">
+                      <div class="col">
+                        <h6 class="card-title"><%= branch.name %></h6>
+                      </div>
+                      <div class="col">
+                        <p class="card-text">Employees: 
+                          <span class="badge badge-info badge-pill"><%= rand(0..40) %></span>
+                        </p>
+                      </div>
+                      <div class="col">
+                        <%= link_to 'Edit', edit_user_branch_path(current_user, branch),
+                          class: 'badge badge-primary' %>
+                      </div>
+                    </div>
+                  </li>
+                <% end %>
+              </ul>
+            </div>
+          <% else %>
+            <p>No company branches registered</p>
+          <% end %>
+        </div>
+        <div class="col-md-6 container-fluid">
+          <%= link_to 'Add a new branch', new_user_branch_path(current_user),
+            class: 'btn btn-success btn-block btn-lg shadow' %>
+          <%= link_to 'Add employees to a branch', '#',
+            class: 'btn btn-success btn-block btn-lg shadow' %>
+        </div>
+      </div>
+    </div>
+  </div>
+<% end %>
+
