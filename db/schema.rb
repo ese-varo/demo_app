@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_26_232501) do
+ActiveRecord::Schema.define(version: 2020_09_27_142406) do
 
   create_table "branches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -26,6 +26,19 @@ ActiveRecord::Schema.define(version: 2020_09_26_232501) do
     t.datetime "updated_at", precision: 6, null: false
     t.index ["name"], name: "index_branches_on_name"
     t.index ["user_id"], name: "index_branches_on_user_id"
+  end
+
+  create_table "employees", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "first_name", default: "", null: false
+    t.string "maiden_name", default: "", null: false
+    t.string "last_name", default: "", null: false
+    t.string "rfc", limit: 13, default: "", null: false
+    t.string "position"
+    t.string "branch", default: "", null: false
+    t.bigint "branch_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["branch_id"], name: "index_employees_on_branch_id"
   end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
@@ -47,4 +60,5 @@ ActiveRecord::Schema.define(version: 2020_09_26_232501) do
   end
 
   add_foreign_key "branches", "users"
+  add_foreign_key "employees", "branches"
 end
