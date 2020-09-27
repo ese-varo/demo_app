@@ -10,7 +10,23 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_25_210017) do
+ActiveRecord::Schema.define(version: 2020_09_26_232501) do
+
+  create_table "branches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name", default: "", null: false
+    t.string "street"
+    t.string "neighborhood"
+    t.integer "street_number"
+    t.integer "apartment_number"
+    t.integer "zip_code"
+    t.string "city"
+    t.string "country"
+    t.bigint "user_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["name"], name: "index_branches_on_name"
+    t.index ["user_id"], name: "index_branches_on_user_id"
+  end
 
   create_table "users", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "email", default: "", null: false
@@ -30,4 +46,5 @@ ActiveRecord::Schema.define(version: 2020_09_25_210017) do
     t.index ["rfc"], name: "index_users_on_rfc", unique: true
   end
 
+  add_foreign_key "branches", "users"
 end
