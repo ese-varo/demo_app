@@ -1,0 +1,65 @@
+<%= form_with(model: [current_user, branch], local: true, class: 'mb-5') do |form| %>
+  <% if branch.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(branch.errors.count, "error") %> prohibited this branch from being saved:</h2>
+
+      <ul>
+        <% branch.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field form-group">
+    <%= form.label :name %>
+    <%= form.text_field :name, class: 'form-control' %>
+  </div>
+
+  <div class="field form-group">
+    <%= form.label :street %>
+    <%= form.text_field :street, class: 'form-control' %>
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-8">
+      <%= form.label :neighborhood %>
+      <%= form.text_field :neighborhood, class: 'form-control' %>
+    </div>
+
+    <div class="field form-group col-md-2">
+      <%= form.label :street_number %>
+      <%= form.text_field :street_number, class: 'form-control' %>
+    </div>
+
+    <div class="field form-group col-md-2">
+      <%= form.label :apartment_number %>
+      <%= form.text_field :apartment_number, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="form-row">
+  </div>
+
+  <div class="form-row">
+    <div class="field form-group col-md-6">
+      <%= form.label :city %>
+      <%= form.text_field :city, class: 'form-control' %>
+    </div>
+
+    <div class="field form-group col-md-4">
+      <%= form.label :country %>
+      <%= form.text_field :country, class: 'form-control' %>
+    </div>
+
+    <div class="field form-group col-md-2">
+      <%= form.label :zip_code %>
+      <%= form.text_field :zip_code, class: 'form-control' %>
+    </div>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>
+

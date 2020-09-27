@@ -1,0 +1,21 @@
+<div class="card text-center mb-5">
+  <div class="card-header">
+    Branch
+  </div>
+  <div class="card-body">
+    <h5 class="card-title"><%= @branch.name %></h5>
+    <div class="card-text">
+      <p><span class="text-secondary">Street: </span><%= @branch.street %></p>
+      <p><span class="text-secondary">Neighborhood: </span><%= @branch.neighborhood %></p>
+      <p><span class="text-secondary">Street Number: </span><%= @branch.street_number %></p>
+      <p><span class="text-secondary">Apartment Number: </span><%= @branch.apartment_number %></p>
+      <p><span class="text-secondary">Zip Code: </span><%= @branch.zip_code %></p>
+      <p><span class="text-secondary">City: </span><%= @branch.city %></p>
+      <p><span class="text-secondary">Country: </span><%= @branch.country %></p>
+    </div>
+    <%= link_to 'Edit', edit_user_branch_path(current_user, @branch), class: 'btn btn-warning btn-sm' %>
+  </div>
+  <div class="card-footer text-muted">
+  </div>
+</div>
+<%= link_to 'Back', user_branches_path(current_user), class: 'btn btn-outline-secondary' %>
