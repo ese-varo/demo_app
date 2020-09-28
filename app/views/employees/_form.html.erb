@@ -30,8 +30,13 @@
 
   <div class="form-row">
     <div class="field form-group col-md-6">
-      <%= form.label :rfc %>
-      <%= form.text_field :rfc, class: 'form-control' %>
+      <% if edit_constraint %>
+        <%= form.label :rfc %>
+        <%= form.text_field :rfc, placeholder: "#{@employee.rfc}", disabled: true, class: 'form-control' %>
+      <% else %>
+        <%= form.label :rfc %>
+        <%= form.text_field :rfc, class: 'form-control' %>
+      <% end %>
     </div>
 
     <div class="field form-group col-md-6">
@@ -46,10 +51,17 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <% if edit_constraint %>
+      <%= form.submit class: 'btn btn-warning' %>
+      <%= link_to 'Delete Employee', [@branch, @employee],
+        method: :delete, data: { confirm: 'Are you sure?' },
+        class: 'btn btn-danger'%>
+    <% else %>
+      <%= form.submit class: 'btn btn-success' %>
+    <% end %>
   </div>
 
-  <%= debug params %>
-  <%= debug Branch.find_by(id: '17') %>
+  <%# <%= debug params %1> %>
+  <%# <%= debug Branch.find_by(id: '17') %1> %>
   
 <% end %>

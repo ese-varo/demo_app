@@ -1,6 +1,5 @@
 <h1>Editing Employee</h1>
 
-<%= render 'form', employee: @employee %>
+<%= render 'form', employee: @employee, branches: current_user.branches, edit_constraint: true %>
 
-<%= link_to 'Show', @employee %> |
-<%= link_to 'Back', employees_path %>
+<%= link_to 'Back', user_branch_path(current_user, @branch), class: 'btn btn-outline-secondary' %>
