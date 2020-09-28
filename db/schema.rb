@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_28_135749) do
+ActiveRecord::Schema.define(version: 2020_09_28_193024) do
 
   create_table "branches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -58,16 +58,6 @@ ActiveRecord::Schema.define(version: 2020_09_28_135749) do
     t.index ["rfc"], name: "index_users_on_rfc", unique: true
   end
 
-  create_table "workers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
-    t.string "name"
-    t.string "rfc"
-    t.bigint "branch_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["branch_id"], name: "index_workers_on_branch_id"
-  end
-
   add_foreign_key "branches", "users"
   add_foreign_key "employees", "branches"
-  add_foreign_key "workers", "branches"
 end
