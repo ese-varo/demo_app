@@ -1,9 +1,9 @@
 <h1>Editing Branch</h1>
 
-<%= render 'form', branch: @branch %>
+<%= render 'form', branch: @branch, edit_constraint: true %>
 
 <% if @branch.employees.any? %>
-  <%= render 'employees/employees', employees: @branch.employees %>
+  <%= render 'employees/employees', employees: @branch.employees, edit_constraint: true %>
 <% else %>
   <p>No employees registered</p>
 <% end %>

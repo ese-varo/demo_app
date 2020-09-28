@@ -59,7 +59,11 @@
   </div>
 
   <div class="actions">
-    <%= form.submit %>
+    <% if edit_constraint %>
+      <%= form.submit class: 'btn btn-warning' %>
+    <% else %>
+      <%= form.submit class: 'btn btn-success' %>
+    <% end %>
   </div>
 <% end %>
 
