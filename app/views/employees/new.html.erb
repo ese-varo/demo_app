@@ -1,7 +1,7 @@
 <h1>New Employee</h1>
 
 <% if current_user.branches.any? %>
-  <%= render 'form', employee: @employee %>
+  <%= render 'form', branches: current_user.branches %>
 <% else %>
   <div class="container">
     <div class="row">
