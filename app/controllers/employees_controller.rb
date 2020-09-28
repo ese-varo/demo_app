@@ -2,26 +2,21 @@ class EmployeesController < ApplicationController
   # before_action :get_branch, only: %i[show edit update destroy]
   before_action :get_branch, except: :new
   before_action :set_employee, only: %i[show edit update destroy]
-
   def show
   end
 
   def new
-    # @employee = Employee.new
-    @employee = current_user.branches.first.employees.build
+    @employee = Employee.new
   end
 
   def edit
   end
 
   def create
-    # @employee = Employee.new(employee_params)
-    # branch = current_user.branches.find_by(name: params[:branch])
-    # @employee.branch = Branch.find_by(name: params[:branch])
-    # @employee = Employee.new(employee_params)
-    
-    @employee = get_branch.employees.build(employee_params)
-
+    @employee = Employee.new(employee_params)
+    @employee.branch_id = @employee.company_branch.to_i
+    # byebug
+    @employee.company_branch = Branch.find_by(id: @employee.branch_id)[:name]
     respond_to do |format|
       if @employee.save
         format.html { redirect_to branch_employees_path(@branch), notice: 'Employee was successfully created.' }
@@ -52,21 +47,22 @@ class EmployeesController < ApplicationController
       format.json { head :no_content }
     end
   end
-
+  
   private
 
+    def get_company_branch
+      Branch.find_by(id: @employee.branch_id).name
+    end
+
     def get_branch
-      # @branch = Branch.find(params[:branch_id])
-      @branch = Branch.find_by(name: params[:branch])
+      # @branch = Branch.find_by(id: get_branch_id)
+    end
+
+    def employee_params
+      params.require(:employee).permit(:first_name, :maiden_name, :last_name, :rfc, :position, :company_branch)
     end
 
     def set_employee
       # @employee = @branch.employees.find(params[:id])
-    end
-
-    def employee_params
-      params.require(:employee).permit(
-        :first_name, :maiden_name, :last_name, :rfc, :position, :branch, :branch_id
-      )
     end
 end
