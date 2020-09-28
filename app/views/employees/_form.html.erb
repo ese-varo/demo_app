@@ -42,7 +42,7 @@
 
   <div class="field form-group">
     <%= form.label :company_branch %>
-    <%= form.collection_select :company_branch, Branch.all, :id, :name %>
+    <%= form.collection_select :company_branch, branches, :id, :name %>
   </div>
 
   <div class="actions">
