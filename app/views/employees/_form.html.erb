@@ -1,10 +1,10 @@
-<%= form_with(model: [@branch, employee], local: true, class: 'mb-5') do |form| %>
-  <% if employee.errors.any? %>
+<%= form_with(model: @employee, local: true, class: 'mb-5') do |form| %>
+  <% if @employee.errors.any? %>
     <div id="error_explanation">
-      <h2><%= pluralize(employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
+      <h2><%= pluralize(@employee.errors.count, "error") %> prohibited this employee from being saved:</h2>
 
       <ul>
-        <% employee.errors.full_messages.each do |message| %>
+        <% @employee.errors.full_messages.each do |message| %>
           <li><%= message %></li>
         <% end %>
       </ul>
@@ -41,11 +41,15 @@
   </div>
 
   <div class="field form-group">
-    <%= form.label :branch %>
-    <%= form.collection_select :branch, Branch.all, :id, :name %>
+    <%= form.label :company_branch %>
+    <%= form.collection_select :company_branch, Branch.all, :id, :name %>
   </div>
 
   <div class="actions">
     <%= form.submit %>
   </div>
+
+  <%= debug params %>
+  <%= debug Branch.find_by(id: '17') %>
+  
 <% end %>

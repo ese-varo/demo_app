@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_09_27_171327) do
+ActiveRecord::Schema.define(version: 2020_09_28_135749) do
 
   create_table "branches", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
     t.string "name", default: "", null: false
@@ -34,11 +34,9 @@ ActiveRecord::Schema.define(version: 2020_09_27_171327) do
     t.string "last_name", default: "", null: false
     t.string "rfc", limit: 13, default: "", null: false
     t.string "position"
-    t.string "branch", default: "", null: false
+    t.string "company_branch", default: "", null: false
     t.bigint "branch_id", null: false
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["branch_id"], name: "index_employees_on_branch_id"
+    t.index ["branch_id"], name: "fk_rails_8604ac23f2"
     t.index ["rfc"], name: "index_employees_on_rfc", unique: true
   end
 
@@ -60,6 +58,16 @@ ActiveRecord::Schema.define(version: 2020_09_27_171327) do
     t.index ["rfc"], name: "index_users_on_rfc", unique: true
   end
 
+  create_table "workers", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8mb4", force: :cascade do |t|
+    t.string "name"
+    t.string "rfc"
+    t.bigint "branch_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["branch_id"], name: "index_workers_on_branch_id"
+  end
+
   add_foreign_key "branches", "users"
   add_foreign_key "employees", "branches"
+  add_foreign_key "workers", "branches"
 end
