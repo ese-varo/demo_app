@@ -1,21 +1,37 @@
-<div class="card text-center mb-5">
-  <div class="card-header">
-    Branch
-  </div>
-  <div class="card-body">
-    <h5 class="card-title"><%= @branch.name %></h5>
-    <div class="card-text">
-      <p><span class="text-secondary">Street: </span><%= @branch.street %></p>
-      <p><span class="text-secondary">Neighborhood: </span><%= @branch.neighborhood %></p>
-      <p><span class="text-secondary">Street Number: </span><%= @branch.street_number %></p>
-      <p><span class="text-secondary">Apartment Number: </span><%= @branch.apartment_number %></p>
-      <p><span class="text-secondary">Zip Code: </span><%= @branch.zip_code %></p>
-      <p><span class="text-secondary">City: </span><%= @branch.city %></p>
-      <p><span class="text-secondary">Country: </span><%= @branch.country %></p>
+<div class="mx-auto col-md-6">
+  <div class="card text-center mb-5">
+    <div class="card-header">
+      <div class="">
+        <div class="d-flex bd-highlight">
+          <div class="p-2 bd-highlight">
+            Branch
+          </div>
+          <div class="ml-auto p-2 bd-highlight">
+            <%= link_to 'Edit', edit_user_branch_path(current_user, @branch), class: 'btn btn-warning btn-sm' %>
+          </div>
+        </div>
+      </div>
     </div>
-    <%= link_to 'Edit', edit_user_branch_path(current_user, @branch), class: 'btn btn-warning btn-sm' %>
-  </div>
-  <div class="card-footer text-muted">
+    <div class="card-body">
+      <h5 class="card-title"><%= @branch.name %></h5>
+      <div class="card-text">
+        <p><span class="text-secondary">Street: </span><%= @branch.street %></p>
+        <p><span class="text-secondary">Neighborhood: </span><%= @branch.neighborhood %></p>
+        <p><span class="text-secondary">Street Number: </span><%= @branch.street_number %></p>
+        <p><span class="text-secondary">Apartment Number: </span><%= @branch.apartment_number %></p>
+        <p><span class="text-secondary">Zip Code: </span><%= @branch.zip_code %></p>
+        <p><span class="text-secondary">City: </span><%= @branch.city %></p>
+        <p><span class="text-secondary">Country: </span><%= @branch.country %></p>
+      </div>
+    </div>
+    <div class="card-footer text-muted">
+    </div>
   </div>
 </div>
+
+<% if @branch.employees.any? %>
+  <%= render 'employees/employees', employees: @branch.employees %>
+<% else %>
+  <p>No employees registered</p>
+<% end %>
 <%= link_to 'Back', user_branches_path(current_user), class: 'btn btn-outline-secondary' %>

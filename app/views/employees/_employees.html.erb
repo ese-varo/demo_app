@@ -1,0 +1,23 @@
+<table class="table table-borderless">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">RFC</th>
+      <th scope="col">Position</th>
+      <th scope="col"></th>
+    </tr>
+  </thead>
+  <tbody>
+    <% employees.each do |employee| %>
+      <% name = "#{employee.first_name} #{employee.last_name} #{employee.maiden_name}" %>
+      <tr>
+        <td><%= name %></td>
+        <td><%= employee.rfc %></td>
+        <td><%= employee.position %></td>
+        <th scope="row"><%= link_to 'Edit', edit_branch_employee_path(@branch, employee),
+          class: 'btn btn-warning btn-sm' %>
+        </th>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
