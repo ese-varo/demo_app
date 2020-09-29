@@ -6,7 +6,7 @@ class CreateEmployees < ActiveRecord::Migration[6.0]
       t.string :last_name, null: false, default: ''
       t.string :rfc, null: false, default: '', limit: 13
       t.string :position
-      t.string :branch, null: false, default: ''
+      t.string :company_branch, null: false, default: ''
       t.references :branch, null: false, foreign_key: true
 
       t.timestamps
