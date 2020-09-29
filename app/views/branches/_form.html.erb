@@ -1,59 +1,69 @@
-<%= form_with(model: [current_user, branch], local: true, class: 'mb-5') do |form| %>
+<%= form_with(model: [current_user, branch], local: true, class: 'mb-5', id: 'branch-form') do |form| %>
 
   <%= render 'shared/serverside_validation_errors', errors: branch.errors, resource: 'branch' %>
 
   <div class="field form-group">
     <%= form.label :name %>
-    <%= form.text_field :name, autofocus: true, class: 'form-control' %>
+    <%= form.text_field :name, autofocus: true, class: 'form-control',
+      required: 'true', minlength: '2', aria: { label: 'Branch name' } %>
+    <span class="error" aria-live="polite"></span>
   </div>
 
   <div class="field form-group">
     <%= form.label :street %>
-    <%= form.text_field :street, class: 'form-control' %>
+    <%= form.text_field :street, class: 'form-control', minlength: '2', aria: { label: 'Street' } %>
+    <span class="error" aria-live="polite"></span>
   </div>
 
   <div class="form-row">
     <div class="field form-group col-md-8">
       <%= form.label :neighborhood %>
-      <%= form.text_field :neighborhood, class: 'form-control' %>
+      <%= form.text_field :neighborhood, class: 'form-control', minlength: '2',
+        aria: { label: 'Neighborhood' } %>
+      <span class="error" aria-live="polite"></span>
     </div>
 
     <div class="field form-group col-md-2">
       <%= form.label :street_number %>
-      <%= form.text_field :street_number, class: 'form-control' %>
+      <%= form.text_field :street_number, class: 'form-control', pattern: '\d+',
+        aria: { label: 'Street number' } %>
+      <span class="error" aria-live="polite"></span>
     </div>
 
     <div class="field form-group col-md-2">
       <%= form.label :apartment_number %>
-      <%= form.text_field :apartment_number, class: 'form-control' %>
+      <%= form.text_field :apartment_number, class: 'form-control', pattern: '\d+',
+        aria: { label: 'Apartment number' } %>
+      <span class="error" aria-live="polite"></span>
     </div>
-  </div>
-
-  <div class="form-row">
   </div>
 
   <div class="form-row">
     <div class="field form-group col-md-6">
       <%= form.label :city %>
-      <%= form.text_field :city, class: 'form-control' %>
+      <%= form.text_field :city, class: 'form-control', minlength: '2', aria: { label: 'City' } %>
+      <span class="error" aria-live="polite"></span>
     </div>
 
     <div class="field form-group col-md-4">
       <%= form.label :country %>
-      <%= form.text_field :country, class: 'form-control' %>
+      <%= form.text_field :country, class: 'form-control', minlength: '2', aria: { label: 'Country' } %>
+      <span class="error" aria-live="polite"></span>
     </div>
 
     <div class="field form-group col-md-2">
       <%= form.label :zip_code %>
-      <%= form.text_field :zip_code, class: 'form-control' %>
+      <%= form.text_field :zip_code, class: 'form-control', pattern: '\d+', minlength: '5', maxlength: '5',
+        aria: { label: 'Zip code' } %>
+      <span class="error" aria-live="polite"></span>
     </div>
   </div>
 
   <div class="actions">
     <% if edit_constraint %>
-      <%= form.submit class: 'btn btn-warning' %>
+      <%= form.submit id: 'submit-btn', class: 'btn btn-warning' %>
     <% else %>
-      <%= form.submit class: 'btn btn-success' %>
+      <%= form.submit id: 'submit-btn', class: 'btn btn-success' %>
     <% end %>
   </div>
 <% end %>

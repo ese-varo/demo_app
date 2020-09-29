@@ -10,6 +10,7 @@ require("@rails/activestorage").start();
 require("channels");
 require("registrations.js");
 require("log_in.js");
+require("branches.js");
 
 import "../stylesheets/application";
 
