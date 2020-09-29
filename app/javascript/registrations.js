@@ -1,3 +1,8 @@
+import {
+  submitValidation,
+  addValidationEvents,
+} from "./inputValidationHelpers.js";
+
 document.addEventListener("turbolinks:load", () => {
   const NEW_USER_FORM = document.querySelector("#sign-up #new_user");
   const SUBMIT_BTN = document.querySelector("#submit-btn");
@@ -37,7 +42,7 @@ document.addEventListener("turbolinks:load", () => {
   );
 
   const ELEMENTS = [
-    (NAME = {
+    {
       input: FIRST_NAME_INPUT,
       errorMsg: FIRST_NAME_ERROR_MSG,
       error: false,
@@ -51,8 +56,8 @@ document.addEventListener("turbolinks:load", () => {
             "Enter a valid name (just valid uppercase and lowercase alphabet chars).";
         }
       },
-    }),
-    (LAST_NAME = {
+    },
+    {
       input: LAST_NAME_INPUT,
       errorMsg: LAST_NAME_ERROR_MSG,
       error: false,
@@ -66,8 +71,8 @@ document.addEventListener("turbolinks:load", () => {
             "Enter a valid last name (just valid uppercase and lowercase alphabet chars).";
         }
       },
-    }),
-    (MAIDEN_NAME = {
+    },
+    {
       input: MAIDEN_NAME_INPUT,
       errorMsg: MAIDEN_NAME_ERROR_MSG,
       error: false,
@@ -81,8 +86,8 @@ document.addEventListener("turbolinks:load", () => {
             "Enter a valid maiden name (just valid uppercase and lowercase alphabet chars).";
         }
       },
-    }),
-    (EMAIL = {
+    },
+    {
       input: EMAIL_INPUT,
       errorMsg: EMAIL_ERROR_MSG,
       error: false,
@@ -93,8 +98,8 @@ document.addEventListener("turbolinks:load", () => {
           this.errorMsg.textContent = "Should be a valid email";
         }
       },
-    }),
-    (COMPANY = {
+    },
+    {
       input: COMPANY_INPUT,
       errorMsg: COMPANY_ERROR_MSG,
       error: false,
@@ -105,8 +110,8 @@ document.addEventListener("turbolinks:load", () => {
           this.errorMsg.textContent = `Should be at least ${this.input.minLength} characters, you entered ${this.input.value.length}.`;
         }
       },
-    }),
-    (RFC = {
+    },
+    {
       input: RFC_INPUT,
       errorMsg: RFC_ERROR_MSG,
       error: false,
@@ -119,8 +124,8 @@ document.addEventListener("turbolinks:load", () => {
           this.errorMsg.textContent = `It should be maximum ${this.input.minLength} characters, you entered ${this.input.value.length}.`;
         }
       },
-    }),
-    (PASSWORD = {
+    },
+    {
       input: PASSWORD_INPUT,
       errorMsg: PASSWORD_ERROR_MSG,
       error: false,
@@ -131,8 +136,8 @@ document.addEventListener("turbolinks:load", () => {
           this.errorMsg.textContent = "Please use at least 6 characters";
         }
       },
-    }),
-    (PASSWORD_CONFIRM = {
+    },
+    {
       input: PASSWORD_CONFIRM_INPUT,
       errorMsg: PASSWORD_CONFIRM_ERROR_MSG,
       error: false,
@@ -143,54 +148,11 @@ document.addEventListener("turbolinks:load", () => {
           this.errorMsg.textContent = "Please use at least 6 characters";
         }
       },
-    }),
+    },
   ];
 
   if (NEW_USER_FORM) {
-    SUBMIT_BTN.addEventListener("click", (event) => {
-      for (const ELEMENT of ELEMENTS) {
-        if (!ELEMENT.input.validity.valid) {
-          ELEMENT.error = true;
-          ELEMENT.validateInput();
-          invalidInput(ELEMENT);
-        } else {
-          ELEMENT.error = false;
-          validInput(ELEMENT);
-        }
-      }
-      if (validateFields()) {
-        NEW_USER_FORM.submit();
-      }
-    });
-
-    for (const ELEMENT of ELEMENTS) {
-      ELEMENT.input.addEventListener("blur", (event) => {
-        if (ELEMENT.input.validity.valid) {
-          validInput(ELEMENT);
-        } else {
-          ELEMENT.validateInput();
-          invalidInput(ELEMENT);
-        }
-      });
-    }
-  }
-
-  function validInput(element) {
-    element.input.className = "form-control is-valid";
-    element.errorMsg.textContent = "Looks good!";
-    element.errorMsg.className = "error valid-feedback";
-  }
-
-  function invalidInput(element) {
-    element.input.className = "form-control is-invalid";
-    element.errorMsg.className = "error invalid-feedback";
-  }
-
-  function validateFields() {
-    let valid = false;
-    for (const ELEMENT of ELEMENTS) {
-      valid = valid || ELEMENT.error;
-    }
-    return !valid;
+    submitValidation(SUBMIT_BTN, ELEMENTS);
+    addValidationEvents(ELEMENTS);
   }
 });

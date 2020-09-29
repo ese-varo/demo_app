@@ -11,6 +11,7 @@ require("channels");
 require("registrations.js");
 require("log_in.js");
 require("branches.js");
+require("inputValidationHelpers.js");
 
 import "../stylesheets/application";
 

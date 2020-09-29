@@ -1,19 +1,10 @@
-document.addEventListener("turbolinks:load", () => {
-  class SimpleTextInput {
-    constructor(input, errorMsg, error = false) {
-      this.input = input;
-      this.errorMsg = errorMsg;
-      this.error = error;
-    }
+import {
+  SimpleTextInput,
+  submitValidation,
+  addValidationEvents,
+} from "./inputValidationHelpers.js";
 
-    validateInput() {
-      if (this.input.validity.valueMissing) {
-        this.errorMsg.textContent = "This field can't be blanck";
-      } else if (this.input.validity.tooShort) {
-        this.errorMsg.textContent = `Should be at least ${this.input.minLength} characters, you entered ${this.input.value.length}.`;
-      }
-    }
-  }
+document.addEventListener("turbolinks:load", () => {
   const NEW_BRANCH_FORM = document.querySelector("#branch-form");
   const SUBMIT_BTN = document.querySelector("#submit-btn");
 
@@ -50,15 +41,12 @@ document.addEventListener("turbolinks:load", () => {
   const ZIP_ERROR_MSG = document.querySelector("#branch_zip_code ~ .error");
 
   const ELEMENTS = [
-    (NAME = new SimpleTextInput(NAME_INPUT, NAME_ERROR_MSG)),
-    (STREET = new SimpleTextInput(STREET_INPUT, STREET_ERROR_MSG)),
-    (NEIGHBORHOOD = new SimpleTextInput(
-      NEIGHBORHOOD_INPUT,
-      NEIGHBORHOOD_ERROR_MSG
-    )),
-    (CITY = new SimpleTextInput(CITY_INPUT, CITY_ERROR_MSG)),
-    (COUNTRY = new SimpleTextInput(COUNTRY_INPUT, COUNTRY_ERROR_MSG)),
-    (STREET_NUMBER = {
+    new SimpleTextInput(NAME_INPUT, NAME_ERROR_MSG),
+    new SimpleTextInput(STREET_INPUT, STREET_ERROR_MSG),
+    new SimpleTextInput(NEIGHBORHOOD_INPUT, NEIGHBORHOOD_ERROR_MSG),
+    new SimpleTextInput(CITY_INPUT, CITY_ERROR_MSG),
+    new SimpleTextInput(COUNTRY_INPUT, COUNTRY_ERROR_MSG),
+    {
       input: STREET_NUMBER_INPUT,
       errorMsg: STREET_NUMBER_ERROR_MSG,
       error: false,
@@ -69,8 +57,8 @@ document.addEventListener("turbolinks:load", () => {
           this.errorMsg.textContent = "Please enter just numbers.";
         }
       },
-    }),
-    (APARTMENT_NUMBER = {
+    },
+    {
       input: APARTMENT_NUMBER_INPUT,
       errorMsg: APARTMENT_NUMBER_ERROR_MSG,
       error: false,
@@ -81,8 +69,8 @@ document.addEventListener("turbolinks:load", () => {
           this.errorMsg.textContent = "Please enter just numbers.";
         }
       },
-    }),
-    (ZIP = {
+    },
+    {
       input: ZIP_INPUT,
       errorMsg: ZIP_ERROR_MSG,
       error: false,
@@ -98,54 +86,11 @@ document.addEventListener("turbolinks:load", () => {
           this.errorMsg.textContent = "Please enter just numbers.";
         }
       },
-    }),
+    },
   ];
 
   if (NEW_BRANCH_FORM) {
-    SUBMIT_BTN.addEventListener("click", (event) => {
-      for (const ELEMENT of ELEMENTS) {
-        if (!ELEMENT.input.validity.valid) {
-          ELEMENT.error = true;
-          ELEMENT.validateInput();
-          invalidInput(ELEMENT);
-        } else {
-          ELEMENT.error = false;
-          validInput(ELEMENT);
-        }
-      }
-      if (validateFields()) {
-        NEW_USER_FORM.submit();
-      }
-    });
-
-    for (const ELEMENT of ELEMENTS) {
-      ELEMENT.input.addEventListener("blur", (event) => {
-        if (ELEMENT.input.validity.valid) {
-          validInput(ELEMENT);
-        } else {
-          ELEMENT.validateInput();
-          invalidInput(ELEMENT);
-        }
-      });
-    }
-  }
-
-  function validInput(element) {
-    element.input.className = "form-control is-valid";
-    element.errorMsg.textContent = "Looks good!";
-    element.errorMsg.className = "error valid-feedback";
-  }
-
-  function invalidInput(element) {
-    element.input.className = "form-control is-invalid";
-    element.errorMsg.className = "error invalid-feedback";
-  }
-
-  function validateFields() {
-    let valid = false;
-    for (const ELEMENT of ELEMENTS) {
-      valid = valid || ELEMENT.error;
-    }
-    return !valid;
+    submitValidation(SUBMIT_BTN, ELEMENTS);
+    addValidationEvents(ELEMENTS);
   }
 });
