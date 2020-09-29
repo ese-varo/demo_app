@@ -1,15 +1,6 @@
 <%= form_with(model: [current_user, branch], local: true, class: 'mb-5') do |form| %>
-  <% if branch.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(branch.errors.count, "error") %> prohibited this branch from being saved:</h2>
 
-      <ul>
-        <% branch.errors.full_messages.each do |message| %>
-          <li><%= message %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <%= render 'shared/serverside_validation_errors', errors: branch.errors, resource: 'branch' %>
 
   <div class="field form-group">
     <%= form.label :name %>
