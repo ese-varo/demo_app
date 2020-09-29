@@ -1,81 +1,83 @@
 <h2>Sign up</h2>
 <small id="emailHelp" class="form-text text-muted">All fields are required *</small>
 
-<%= form_for(resource, as: resource_name, url: registration_path(resource_name), novalidate: "") do |f| %>
-  <%= render "devise/shared/error_messages", resource: resource %>
+<div id="sign-up">
+  <%= form_for(resource, as: resource_name, url: registration_path(resource_name), novalidate: "") do |f| %>
+    <%= render "devise/shared/error_messages", resource: resource %>
 
-  <div class="form-row">
-    <div class="field form-group col-md-4">
-      <%= f.label :first_name, "Name" %><br />
-      <%= f.text_field :first_name, auto_complete: "name", class: 'form-control',
-        required: 'true', minlength: '2', pattern: '[a-zA-Z][a-zA-Z\s]+$',
-        aria: { label: 'User first name' } %>
-      <span class="error" aria-live="polite"></span>
+    <div class="form-row">
+      <div class="field form-group col-md-4">
+        <%= f.label :first_name, "Name" %><br />
+        <%= f.text_field :first_name, autofocus: true, auto_complete: "name", class: 'form-control',
+          required: 'true', minlength: '2', pattern: '[a-zA-Z][a-zA-Z\s]+$',
+          aria: { label: 'User first name' } %>
+        <span class="error" aria-live="polite"></span>
+      </div>
+
+      <div class="field form-group col-md-4">
+        <%= f.label :last_name %><br />
+        <%= f.text_field :last_name, auto_complete: "last-name", class: 'form-control',
+          required: 'true', minlength: '2', pattern: '[a-zA-Z][a-zA-Z\s]+$',
+          aria: { label: 'User last name' } %>
+        <span class="error" aria-live="polite"></span>
+      </div>
+
+      <div class="field form-group col-md-4">
+        <%= f.label :maiden_name %><br />
+        <%= f.text_field :maiden_name, auto_complete: "maiden-name", class: 'form-control',
+          required: 'true', minlength: '2', pattern: '[a-zA-Z][a-zA-Z\s]+$',
+          aria: { label: 'User maiden name' } %>
+        <span class="error" aria-live="polite"></span>
+      </div>
     </div>
 
-    <div class="field form-group col-md-4">
-      <%= f.label :last_name %><br />
-      <%= f.text_field :last_name, auto_complete: "last-name", class: 'form-control',
-        required: 'true', minlength: '2', pattern: '[a-zA-Z][a-zA-Z\s]+$',
-        aria: { label: 'User last name' } %>
-      <span class="error" aria-live="polite"></span>
+    <div class="form-row">
+      <div class="field form-group col-md-4">
+        <%= f.label :email %><br />
+        <%= f.email_field :email, autocomplete: "email", class: 'form-control',
+          required: 'true', pattern: '\S+@\S+\.\S+',
+          aria: { label: 'Email address' } %>
+        <span class="error" aria-live="polite"></span>
+      </div>
+
+      <div class="field form-group col-md-4">
+        <%= f.label :company %><br />
+        <%= f.text_field :company, auto_complete: "company", class: 'form-control',
+          required: 'true', minlength: '2', aria: { label: 'Company name' } %>
+        <span class="error" aria-live="polite"></span>
+      </div>
+
+      <div class="field form-group col-md-4">
+        <%= f.label :rfc, 'RFC' %><br />
+        <%= f.text_field :rfc, auto_complete: "rfc", class: 'form-control',
+          required: 'true', minlength: '12', maxlength: '13', aria: { label: 'RFC' } %>
+        <span class="error" aria-live="polite"></span>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="field form-group col-md-6">
+        <%= f.label :password %>
+        <% if @minimum_password_length %>
+          <em>(<%= @minimum_password_length %> characters minimum)</em>
+        <% end %><br />
+        <%= f.password_field :password, autocomplete: "new-password", class: 'form-control',
+          required: 'true', minlength: '6' %>
+        <span class="error" aria-live="polite"></span>
+      </div>
+
+      <div class="field form-group col-md-6">
+        <%= f.label :password_confirmation %><br />
+        <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control',
+          required: 'ture', minlength: '6'%>
+        <span class="error" aria-live="polite"></span>
+      </div>
     </div>
 
-    <div class="field form-group col-md-4">
-      <%= f.label :maiden_name %><br />
-      <%= f.text_field :maiden_name, auto_complete: "maiden-name", class: 'form-control',
-        required: 'true', minlength: '2', pattern: '[a-zA-Z][a-zA-Z\s]+$',
-        aria: { label: 'User maiden name' } %>
-      <span class="error" aria-live="polite"></span>
-    </div>
-  </div>
 
-  <div class="form-row">
-    <div class="field form-group col-md-4">
-      <%= f.label :email %><br />
-      <%= f.email_field :email, autocomplete: "email", class: 'form-control',
-        required: 'true', pattern: '\S+@\S+\.\S+',
-        aria: { label: 'Email address' } %>
-      <span class="error" aria-live="polite"></span>
+    <div class="actions">
+      <%= f.button 'Sign up', class: 'btn btn-primary', id: 'submit-btn' %>
     </div>
-
-    <div class="field form-group col-md-4">
-      <%= f.label :company %><br />
-      <%= f.text_field :company, auto_complete: "company", class: 'form-control',
-        required: 'true', minlength: '2', aria: { label: 'Company name' } %>
-      <span class="error" aria-live="polite"></span>
-    </div>
-
-    <div class="field form-group col-md-4">
-      <%= f.label :rfc, 'RFC' %><br />
-      <%= f.text_field :rfc, auto_complete: "rfc", class: 'form-control',
-                       required: 'true', minlength: '12', maxlength: '13', aria: { label: 'RFC' } %>
-      <span class="error" aria-live="polite"></span>
-    </div>
-  </div>
-  <div class="form-row">
-    <div class="field form-group col-md-6">
-      <%= f.label :password %>
-      <% if @minimum_password_length %>
-        <em>(<%= @minimum_password_length %> characters minimum)</em>
-      <% end %><br />
-      <%= f.password_field :password, autocomplete: "new-password", class: 'form-control',
-                           required: 'true', minlength: '6' %>
-      <span class="error" aria-live="polite"></span>
-    </div>
-
-    <div class="field form-group col-md-6">
-      <%= f.label :password_confirmation %><br />
-      <%= f.password_field :password_confirmation, autocomplete: "new-password", class: 'form-control',
-                           required: 'ture', minlength: '6'%>
-      <span class="error" aria-live="polite"></span>
-    </div>
-  </div>
-
-
-  <div class="actions">
-    <%= f.button 'Sign up', class: 'btn btn-primary', id: 'submit-btn' %>
-  </div>
-<% end %>
+  <% end %>
+</div>
 
 <%= render "devise/shared/links" %>

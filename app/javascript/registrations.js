@@ -1,5 +1,5 @@
 document.addEventListener("turbolinks:load", () => {
-  const NEW_USER_FORM = document.querySelector("#new_user");
+  const NEW_USER_FORM = document.querySelector("#sign-up #new_user");
   const SUBMIT_BTN = document.querySelector("#submit-btn");
 
   const FIRST_NAME_INPUT = document.querySelector("#user_first_name");
