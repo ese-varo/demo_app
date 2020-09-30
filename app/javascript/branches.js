@@ -90,7 +90,7 @@ document.addEventListener("turbolinks:load", () => {
   ];
 
   if (NEW_BRANCH_FORM) {
-    submitValidation(SUBMIT_BTN, ELEMENTS);
+    submitValidation(NEW_BRANCH_FORM, SUBMIT_BTN, ELEMENTS);
     addValidationEvents(ELEMENTS);
   }
 });

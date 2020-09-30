@@ -152,7 +152,7 @@ document.addEventListener("turbolinks:load", () => {
   ];
 
   if (NEW_USER_FORM) {
-    submitValidation(SUBMIT_BTN, ELEMENTS);
+    submitValidation(NEW_USER_FORM, SUBMIT_BTN, ELEMENTS);
     addValidationEvents(ELEMENTS);
   }
 });

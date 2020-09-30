@@ -33,7 +33,7 @@ const validateFields = (ELEMENTS) => {
   return !valid;
 };
 
-export const submitValidation = (SUBMIT_BTN, ELEMENTS) => {
+export const submitValidation = (FORM, SUBMIT_BTN, ELEMENTS) => {
   SUBMIT_BTN.addEventListener("click", (event) => {
     for (const ELEMENT of ELEMENTS) {
       if (!ELEMENT.input.validity.valid) {
@@ -46,7 +46,7 @@ export const submitValidation = (SUBMIT_BTN, ELEMENTS) => {
       }
     }
     if (validateFields(ELEMENTS)) {
-      NEW_USER_FORM.submit();
+      FORM.submit();
     }
   });
 };

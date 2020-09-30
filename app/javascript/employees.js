@@ -56,7 +56,7 @@ document.addEventListener("turbolinks:load", () => {
   ];
 
   if (EMPLOYEE_FORM) {
-    submitValidation(SUBMIT_BTN, ELEMENTS);
+    submitValidation(EMPLOYEE_FORM, SUBMIT_BTN, ELEMENTS);
     addValidationEvents(ELEMENTS);
   }
 });
