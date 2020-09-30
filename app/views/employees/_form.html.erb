@@ -1,21 +1,27 @@
-<%= form_with(model: @employee, local: true, class: 'mb-5') do |form| %>
+<%= form_with(model: @employee, local: true, class: 'mb-5', id: 'employee-form') do |form| %>
 
   <%= render 'shared/serverside_validation_errors', errors: @employee.errors, resource: 'employee' %>
 
   <div class="form-row">
     <div class="field form-group col-md-4">
       <%= form.label :first_name %>
-      <%= form.text_field :first_name, autofocus: true, class: 'form-control' %>
+      <%= form.text_field :first_name, autofocus: true, class: 'form-control',
+        required: 'true', minlength: '2', aria: { label: 'First name' } %>
+      <span class="error" aria-live="polite"></span>
     </div>
 
     <div class="field form-group col-md-4">
       <%= form.label :maiden_name %>
-      <%= form.text_field :maiden_name, class: 'form-control' %>
+      <%= form.text_field :maiden_name, class: 'form-control',
+        required: 'true', minlength: '2', aria: { label: 'Maiden name' } %>
+      <span class="error" aria-live="polite"></span>
     </div>
 
     <div class="field form-group col-md-4">
       <%= form.label :last_name %>
-      <%= form.text_field :last_name, class: 'form-control' %>
+      <%= form.text_field :last_name, class: 'form-control',
+        required: 'true', minlength: '2', aria: { label: 'Last name' } %>
+      <span class="error" aria-live="polite"></span>
     </div>
   </div>
 
@@ -23,16 +29,22 @@
     <div class="field form-group col-md-6">
       <% if edit_constraint %>
         <%= form.label :rfc %>
-        <%= form.text_field :rfc, placeholder: "#{@employee.rfc}", disabled: true, class: 'form-control' %>
+        <%= form.text_field :rfc, placeholder: "#{@employee.rfc}", disabled: true, class: 'form-control',
+          aria: { label: 'RFC' } %>
+        <span class="error" aria-live="polite"></span>
       <% else %>
         <%= form.label :rfc %>
-        <%= form.text_field :rfc, class: 'form-control' %>
+        <%= form.text_field :rfc, class: 'form-control',
+          required: 'true', minlength: '2', aria: { label: 'RFC' } %>
+        <span class="error" aria-live="polite"></span>
       <% end %>
     </div>
 
     <div class="field form-group col-md-6">
       <%= form.label :position %>
-      <%= form.text_field :position, class: 'form-control' %>
+      <%= form.text_field :position, class: 'form-control',
+        minlength: '2', aria: { label: 'Position' } %>
+      <span class="error" aria-live="polite"></span>
     </div>
   </div>
 
@@ -46,9 +58,9 @@
       <%= form.submit class: 'btn btn-warning' %>
       <%= link_to 'Delete Employee', [@branch, @employee],
         method: :delete, data: { confirm: 'Are you sure?' },
-        class: 'btn btn-danger'%>
+        id: 'submit-btn', class: 'btn btn-danger'%>
     <% else %>
-      <%= form.submit class: 'btn btn-success' %>
+      <%= form.submit id: 'submit-btn', class: 'btn btn-success' %>
     <% end %>
   </div>
 

@@ -1,4 +1,4 @@
-class SimpleTextInput {
+export class SimpleTextInput {
   constructor(input, errorMsg, error = false) {
     this.input = input;
     this.errorMsg = errorMsg;
@@ -33,7 +33,7 @@ const validateFields = (ELEMENTS) => {
   return !valid;
 };
 
-const submitValidation = (SUBMIT_BTN, ELEMENTS) => {
+export const submitValidation = (SUBMIT_BTN, ELEMENTS) => {
   SUBMIT_BTN.addEventListener("click", (event) => {
     for (const ELEMENT of ELEMENTS) {
       if (!ELEMENT.input.validity.valid) {
@@ -51,7 +51,7 @@ const submitValidation = (SUBMIT_BTN, ELEMENTS) => {
   });
 };
 
-const addValidationEvents = (ELEMENTS) => {
+export const addValidationEvents = (ELEMENTS) => {
   for (const ELEMENT of ELEMENTS) {
     ELEMENT.input.addEventListener("blur", (event) => {
       if (ELEMENT.input.validity.valid) {
@@ -62,13 +62,4 @@ const addValidationEvents = (ELEMENTS) => {
       }
     });
   }
-};
-
-export {
-  SimpleTextInput,
-  validInput,
-  invalidInput,
-  validateFields,
-  submitValidation,
-  addValidationEvents,
 };

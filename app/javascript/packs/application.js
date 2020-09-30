@@ -12,6 +12,7 @@ require("registrations.js");
 require("log_in.js");
 require("branches.js");
 require("inputValidationHelpers.js");
+require("employees.js");
 
 import "../stylesheets/application";
 
